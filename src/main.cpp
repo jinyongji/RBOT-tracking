@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
     vector<float> distances = {200.0f, 400.0f,  600.0f};
 
     vector<Object3D*> objects;
-    Object3D* obj = new Object3D("/media/jyj/JYJ/RBOT-dataset/cat/cat_simple.obj",
+    Object3D* obj = new Object3D("/media/jyj/JYJ/RBOT-dataset/bakingsoda/bakingsoda.obj",
                                  0, 0, 500, 0, 0, 0, 1.0, 0.55f, distances);
     obj->setPose(gtPoses[0]);
     obj->setInitialPose(gtPoses[0]);
@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
         //ss << "/media/jyj/JYJ/RBOT-dataset/RBOT_dataset_p3/duck/frames/a_regular"
         //ss << "/media/jyj/JYJ/RBOT-dataset/RBOT_dataset_p3/duck/frames/b_dynamiclight"
         //ss << "/media/jyj/JYJ/RBOT-dataset/RBOT_dataset_p3/duck/frames/c_noisy"
-        ss << "/media/jyj/JYJ/RBOT-dataset/cat/frames/a_regular"
+        ss << "/media/jyj/JYJ/RBOT-dataset/bakingsoda/frames/a_regular"
            << setfill('0') << setw(4) << i << ".png";
         Mat frame = imread(ss.str());
         if (frame.empty()) {
@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
             Matx33f R_err = R_pred.t() * R_gt;
             float trace_R = R_err(0,0) + R_err(1,1) + R_err(2,2);
             float angle_rad = acosf(std::max(-1.0f, std::min(1.0f, (trace_R - 1.0f) / 2.0f)));
-            savePoseToFile(objects[0]->getPose(), "predicted_poses_cat1.txt");
+            savePoseToFile(objects[0]->getPose(), "predicted_poses_bs.txt");
             if (t_err > 0.05f || angle_rad > 0.0873f) {
                 objects[0]->setPose(gt);
                 //objects[0]->setInitialPose(gt);

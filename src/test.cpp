@@ -166,7 +166,8 @@ void evaluate_5cm_5deg(const string& gt_file, const string& pred_file) {
         // 提取平移向量并换单位（mm → m）
         Vec3f t_gt(T_gt(0, 3), T_gt(1, 3), T_gt(2, 3));
         Vec3f t_pred(T_pred(0, 3), T_pred(1, 3), T_pred(2, 3));
-        float t_err = get_errort(t_gt,t_pred)/1000;  // m
+        //float t_err = get_errort(t_gt,t_pred)/1000;  // m
+        float t_err = norm(t_gt - t_pred) / 1000.0f;
 
 
         // 提取旋转矩阵
@@ -205,6 +206,6 @@ void evaluate_5cm_5deg(const string& gt_file, const string& pred_file) {
 
 int main() {
     //evaluate_ADD("poses_first.txt", "predicted_poses_ape_regular.txt", "/media/jyj/JYJ/RBOT-dataset/ape/ape.ply");
-    evaluate_5cm_5deg("poses_first.txt", "predicted_poses_cat1.txt");
+    evaluate_5cm_5deg("poses_first.txt", "predicted_poses_bs.txt");
     return 0;
 }
